@@ -6,6 +6,9 @@ module.exports = [{
     name: 'front',
     entry: './src/index.js',
     mode: 'production',
+    devServer: {
+        contentBase: './dist'
+    },
     module: {
         rules: [
             {
@@ -50,6 +53,9 @@ module.exports = [{
     name: 'manager',
     entry: './src/index.js',
     mode: 'production',
+    devServer: {
+        contentBase: './dist'
+    },
     module: {
         rules: [
 
