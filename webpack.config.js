@@ -6,6 +6,9 @@ module.exports = [{
     name: 'front',
     entry: './src/index.js',
     mode: 'production',
+    externals: {
+        'vue': 'Vue'
+    },
     devServer: {
         contentBase: './dist'
     },
@@ -53,6 +56,9 @@ module.exports = [{
     name: 'manager',
     entry: './src/index.js',
     mode: 'production',
+    externals: {
+        'vue': 'Vue'
+    },
     devServer: {
         contentBase: './dist'
     },

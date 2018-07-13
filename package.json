@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "webpack --config webpack.config.js -p",
-    "serve": "webpack-dev-server --open"
+    "serve": "webpack-dev-server --inline -d"
   },
   "dependencies": {
     "vue": "^2.5.16",
