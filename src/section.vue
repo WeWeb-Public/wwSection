@@ -56,7 +56,13 @@ let a = {
   name: "section_A",
   props: {
     msg: String,
-    section: Object
+    sectionRef: Object
+  },
+  computed: {
+    section() {
+      //return this.sectionRef.wwGet();
+      return this.$store.state.sections[this.sectionRef.id];
+    }
   },
   methods: {
     lala: function () {
