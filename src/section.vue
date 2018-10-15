@@ -46,7 +46,7 @@
         <a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a>
       </li>
     </ul>
-    <wwObject v-bind:ww-object="section.data.title"></wwObject>
+    <wwObject v-bind:ww-object="section.data.title" v-bind:section="section" ></wwObject>
   </div>
 </template>
 
