@@ -1,101 +1,88 @@
+
+<!-- This is a Vue.js single file component. -->
+<!-- Check the Vue.js doc here :  -->
+<!-- https://vuejs.org/v2/guide/ -->
+
+<!-- This is your HTML -->
 <template>
-  <div class="hello">
-    <p>
-      For guide and recipes on how to configure / customize this project,<br> check out the
-      <a href="https://github.com/vuejs/vue-cli/tree/dev/docs" target="_blank">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li>
-        <a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank">babel</a>
-      </li>
-      <li>
-        <a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank">eslint</a>
-      </li>
-    </ul>
-    <h3 @click="coucou">Essential Links</h3>
-    <ul>
-      <li>
-        <a href="https://vuejs.org" target="_blank">Core Docs</a>
-      </li>
-      <li>
-        <a href="https://forum.vuejs.org" target="_blank">Forum</a>
-      </li>
-      <li>
-        <a href="https://chat.vuejs.org" target="_blank">Community Chat</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/vuejs" target="_blank">Twitter</a>
-      </li>
-    </ul>
-    <h3 @click="lala">Ecosystem</h3>
-    <ul>
-      <li>
-        <a href="https://router.vuejs.org/en/essentials/getting-started.html" target="_blank">vue-router</a>
-      </li>
-      <li>
-        <a href="https://vuex.vuejs.org/en/intro.html" target="_blank">vuex</a>
-      </li>
-      <li>
-        <a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank">vue-devtools</a>
-      </li>
-      <li>
-        <a href="https://vue-loader.vuejs.org" target="_blank">vue-loader</a>
-      </li>
-      <li>
-        <a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a>
-      </li>
-    </ul>
-    <wwObject v-bind:ww-object="section.data.title" v-bind:section="section" ></wwObject>
-  </div>
+    <div class="hello">
+
+        <!-- Weweb Wallpaper -->
+        <wwObject class="background" v-bind:ww-object="section.data.wewebWP" v-bind:section="section" ww-category="background"></wwObject>
+
+        <div class="content">
+            <!-- Hello world ! -->
+            <wwObject v-bind:ww-object="section.data.helloWorld" v-bind:section="section"></wwObject>
+        </div>
+
+    </div>
 </template>
 
+<!-- This is your Javascript -->
+<!-- ✨ Here comes the magic ✨ -->
 <script>
-let a = {
-  name: "section_A",
-  props: {
-    section: Object
-  },
-  computed: {
-  },
-  methods: {
-    lala: function () {
-      console.log("lala");
+export default {
+    name: "hello-world",
+    props: {
+        // The section object is passed to you.
+        // It contains all the info and data about the section
+        // Use it has you like !
+        section: Object
+    },
+    created() {
+
+        //Initialize section data
+        this.section.data = this.section.data || {};
+
+        //Initialize helloWorld text
+        if (!this.section.data.helloWorld) {
+            this.section.data.helloWorld = wwLib.wwObject.getDefault({
+                type: 'ww-text',
+                data: {
+                    text: {
+                        fr_FR: 'Hello World !',
+                        en_GB: 'Hello World !'
+                    },
+                    align: 'center',
+                    size: 4,
+                    color: 'white'
+                }
+            });
+        }
+
+        //Initialize image
+        if (!this.section.data.wewebWP) {
+            this.section.data.wewebWP = wwLib.wwObject.getDefault({
+                type: 'ww-image',
+                data: {
+                    url: 'http://cdn.wewebapp.io/public/images/weweb-wp.png'
+                }
+            });
+        }
+
+    },
+    methods: {
     }
-  }
 };
-
-/* wwManager:start */
-const managerFunctions = require("./manager.js").default;
-for (const key in managerFunctions) {
-  if (a.methods[key]) {
-    console.log("Function already exists : ", key);
-  } else {
-    a.methods[key] = managerFunctions[key];
-  }
-}
-/* wwManager:end */
-
-console.log(a.methods);
-
-export default a;
 </script>
 
+<!-- This is your CSS -->
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- Add lang="scss" or others to use computed CSS -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-  color: red;
+.hello {
+  padding: 100px 50px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+
+.content {
+  position: relative;
 }
 </style>
