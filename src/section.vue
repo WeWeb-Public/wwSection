@@ -1,4 +1,3 @@
-
 <!-- This is a Vue.js single file component. -->
 <!-- Check the Vue.js doc here :  -->
 <!-- https://vuejs.org/v2/guide/ -->
@@ -8,11 +7,13 @@
     <div class="hello">
 
         <!-- Weweb Wallpaper -->
-        <wwObject class="background" v-bind:ww-object="section.data.wewebWP" v-bind:section="section" ww-category="background"></wwObject>
+        <wwObject class="background" v-bind:ww-object="section.data.wewebWP" v-bind:section="section" ww-category="background">
+        </wwObject>
 
         <div class="content">
             <!-- Hello world ! -->
-            <wwObject v-bind:ww-object="section.data.helloWorld" v-bind:section="section"></wwObject>
+            <wwObject v-bind:ww-object="section.data.helloWorld" v-bind:section="section">
+            </wwObject>
         </div>
 
     </div>

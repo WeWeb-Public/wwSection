@@ -1,6 +1,8 @@
 // webpack.config.js
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const autoprefixer = require('autoprefixer');
+
 
 module.exports = [{
     name: 'front',
@@ -39,7 +41,26 @@ module.exports = [{
                 use: [
                     'vue-style-loader',
                     'css-loader',
-                    'sass-loader'
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: function () {
+                                return [autoprefixer]
+                            }
+                        }
+                    },
+                    'sass-loader',
+                ]
+            },
+            {
+                test: /\.(png|jpg|gif)$/i,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8192
+                        }
+                    }
                 ]
             }
         ]
@@ -83,7 +104,26 @@ module.exports = [{
                 use: [
                     'vue-style-loader',
                     'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: function () {
+                                return [autoprefixer]
+                            }
+                        }
+                    },
                     'sass-loader'
+                ]
+            },
+            {
+                test: /\.(png|jpg|gif)$/i,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8192
+                        }
+                    }
                 ]
             }
         ]
