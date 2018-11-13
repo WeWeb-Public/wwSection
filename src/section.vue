@@ -5,14 +5,17 @@
 <!-- This is your HTML -->
 <template>
     <div class="hello">
+        <!-- wwManager:start -->
+        <wwSectionEditMenu v-bind:sectionCtrl="sectionCtrl"></wwSectionEditMenu>
+        <!-- wwManager:end -->
 
         <!-- Weweb Wallpaper -->
-        <wwObject class="background" v-bind:ww-object="section.data.wewebWP" v-bind:section="section" ww-category="background">
+        <wwObject class="background" v-bind:ww-object="section.data.wewebWP" ww-category="background">
         </wwObject>
 
         <div class="content">
             <!-- Hello world ! -->
-            <wwObject v-bind:ww-object="section.data.helloWorld" v-bind:section="section">
+            <wwObject v-bind:ww-object="section.data.helloWorld">
             </wwObject>
         </div>
 
@@ -25,10 +28,16 @@
 export default {
     name: "hello-world",
     props: {
-        // The section object is passed to you.
-        // It contains all the info and data about the section
-        // Use it has you like !
-        section: Object
+        // The section controller object is passed to you.
+        sectionCtrl: Object
+    },
+    data() {
+        return {
+            //Get the section object here !
+            // It contains all the info and data about the section
+            // Use it has you like !
+            section: this.sectionCtrl.get()
+        }
     },
     created() {
 
