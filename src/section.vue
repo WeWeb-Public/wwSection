@@ -33,10 +33,14 @@ export default {
     },
     data() {
         return {
-            //Get the section object here !
-            // It contains all the info and data about the section
-            // Use it has you like !
-            section: this.sectionCtrl.get()
+        }
+    },
+    computed: {
+        //Get the section object here !
+        // It contains all the info and data about the section
+        // Use it has you like !
+        section() {
+            return this.sectionCtrl.get();
         }
     },
     created() {
