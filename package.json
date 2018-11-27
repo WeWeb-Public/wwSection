@@ -17,10 +17,10 @@
         "@vue/cli-service": "^3.0.5",
         "autoprefixer": "^9.3.1",
         "babel-loader": "^7.1.4",
-        "cache-loader": "^1.2.2",
-        "css-loader": "^0.28.11",
-        "node-sass": "^4.9.4",
-        "postcss": "^7.0.5",
+        "cache-loader": "^1.2.5",
+        "css-loader": "^1.0.1",
+        "node-sass": "^4.10.0",
+        "postcss": "^7.0.6",
         "sass-loader": "^7.1.0",
         "vue-loader": "^15.2.2",
         "vue-style-loader": "^4.1.0",
@@ -28,7 +28,7 @@
         "webpack": "^4.9.1",
         "webpack-cli": "^2.1.4",
         "webpack-dev-server": "^3.1.4",
-        "webpack-strip-block": "^0.2.0"
+        "weweb-strip-block": "^0.0.2"
     },
     "browserslist": [
         "> 1%",

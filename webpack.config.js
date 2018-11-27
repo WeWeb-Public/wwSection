@@ -22,10 +22,14 @@ module.exports = [{
             },
             {
                 test: /\.vue$/,
-                loader: 'webpack-strip-block',
+                loader: 'weweb-strip-block',
                 options: {
-                    start: 'wwManager:start',
-                    end: 'wwManager:end'
+                    blocks: [
+                        {
+                            start: 'wwManager:start',
+                            end: 'wwManager:end'
+                        }
+                    ]
                 }
             },
             // this will apply to both plain `.js` files
