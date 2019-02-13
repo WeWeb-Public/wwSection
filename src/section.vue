@@ -8,17 +8,13 @@
         <!-- wwManager:start -->
         <wwSectionEditMenu v-bind:sectionCtrl="sectionCtrl"></wwSectionEditMenu>
         <!-- wwManager:end -->
-
         <!-- Weweb Wallpaper -->
-        <wwObject class="background" v-bind:ww-object="section.data.wewebWP" ww-category="background">
-        </wwObject>
+        <wwObject class="background" v-bind:ww-object="section.data.wewebWP" ww-category="background"></wwObject>
 
         <div class="content">
             <!-- Hello world ! -->
-            <wwObject v-bind:ww-object="section.data.helloWorld">
-            </wwObject>
+            <wwObject v-bind:ww-object="section.data.helloWorld"></wwObject>
         </div>
-
     </div>
 </template>
 
@@ -26,7 +22,7 @@
 <!-- ✨ Here comes the magic ✨ -->
 <script>
 export default {
-    name: "hello-world",
+    name: "__COMPONENT_NAME__",
     props: {
         // The section controller object is passed to you.
         sectionCtrl: Object
@@ -85,18 +81,18 @@ export default {
 <!-- Add lang="scss" or others to use computed CSS -->
 <style scoped>
 .hello {
-  padding: 100px 50px;
+    padding: 100px 50px;
 }
 
 .background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
 }
 
 .content {
-  position: relative;
+    position: relative;
 }
 </style>

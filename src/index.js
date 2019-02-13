@@ -1,10 +1,16 @@
 import section from './section.vue'
 
-const name = "hello-world";
+const name = "__NAME__";
+const version = '__VERSION__';
 
 const addComponent = function () {
     if (window.vm) {
-        window.vm.addComponent(name, section);
+
+        window.vm.addComponent({
+            name: name,
+            version: version,
+            content: section
+        });
 
         return true;
     }
