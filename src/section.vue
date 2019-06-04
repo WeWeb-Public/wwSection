@@ -9,11 +9,17 @@
         <wwSectionEditMenu v-bind:sectionCtrl="sectionCtrl"></wwSectionEditMenu>
         <!-- wwManager:end -->
         <!-- Weweb Wallpaper -->
-        <wwObject class="background" v-bind:ww-object="section.data.wewebWP" ww-category="background"></wwObject>
+        <wwObject class="background" v-bind:ww-object="section.data.color" ww-category="background"></wwObject>
 
         <div class="content">
             <!-- Hello world ! -->
             <wwObject v-bind:ww-object="section.data.helloWorld"></wwObject>
+            <wwObject class="hello-image" v-bind:ww-object="section.data.image1"></wwObject>
+
+            <!-- LIST -->
+            <wwLayoutColumn tag="div" ww-default="ww-text" :ww-list="section.data.list" class="list" @ww-add="add(section.data.list, $event)" @ww-remove="remove(section.data.list, $event)">
+                <wwObject tag="div" v-for="object in section.data.list" :key="object.uniqueId" :ww-object="object"></wwObject>
+            </wwLayoutColumn>
         </div>
     </div>
 </template>
@@ -42,36 +48,69 @@ export default {
     created() {
 
         //Initialize section data
+        let needUpdate = false
+
         this.section.data = this.section.data || {};
 
-        //Initialize helloWorld text
+        //Initialize content
         if (!this.section.data.helloWorld) {
             this.section.data.helloWorld = wwLib.wwObject.getDefault({
                 type: 'ww-text',
                 data: {
                     text: {
-                        fr_FR: 'Hello World !',
+                        fr_FR: 'Hello World FR !',
                         en_GB: 'Hello World !'
-                    },
-                    align: 'center',
-                    size: 4,
-                    color: 'white'
+                    }
                 }
             });
+            needUpdate = true
         }
 
-        //Initialize image
-        if (!this.section.data.wewebWP) {
-            this.section.data.wewebWP = wwLib.wwObject.getDefault({
-                type: 'ww-image',
-                data: {
-                    url: 'http://cdn.wewebapp.io/public/images/weweb-wp.png'
-                }
+        if (!this.section.data.color) {
+            this.section.data.color = wwLib.wwObject.getDefault({
+                type: 'ww-color'
             });
+            needUpdate = true
+        }
+
+        if (!this.section.data.image1) {
+            this.section.data.image1 = wwLib.wwObject.getDefault({
+                type: 'ww-image'
+            });
+            needUpdate = true
+        }
+
+        if (!this.section.data.list) {
+            this.section.data.list = [];
+            needUpdate = true;
+        }
+
+
+        if (needUpdate) {
+            this.sectionCtrl.update(this.section);
         }
 
     },
     methods: {
+        /* wwManager:start */
+        add(list, options) {
+            try {
+                list.splice(options.index, 0, options.wwObject);
+                this.sectionCtrl.update(this.section);
+            } catch (error) {
+                wwLib.wwLog.error('ERROR : ', error);
+            }
+        },
+        remove(list, options) {
+            try {
+                list.splice(options.index, 1);
+                this.sectionCtrl.update(this.section);
+            } catch (error) {
+                wwLib.wwLog.error('ERROR : ', error);
+            }
+        },
+        /* wwManager:end */
+
     }
 };
 </script>
@@ -79,7 +118,7 @@ export default {
 <!-- This is your CSS -->
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <!-- Add lang="scss" or others to use computed CSS -->
-<style scoped>
+<style lang="scss" scoped>
 .hello {
     padding: 100px 50px;
 }
@@ -94,5 +133,13 @@ export default {
 
 .content {
     position: relative;
+    .hello-image {
+        width: 200px;
+    }
+    .list {
+        margin-top: 20px;
+        width: 50%;
+        margin-left: 25%;
+    }
 }
 </style>
