@@ -8,18 +8,24 @@
         <!-- wwManager:start -->
         <wwSectionEditMenu v-bind:sectionCtrl="sectionCtrl"></wwSectionEditMenu>
         <!-- wwManager:end -->
-        <!-- Weweb Wallpaper -->
-        <wwObject class="background" v-bind:ww-object="section.data.color" ww-category="background"></wwObject>
+
+        <!-- This is the background of the section -->
+        <wwObject class="background" v-bind:ww-object="section.data.background" ww-category="background"></wwObject>
 
         <div class="content">
-            <!-- Hello world ! -->
+            <div>tralalalala</div>
+            <!-- This is a simple WeWeb object which can be anything in the editor -->
             <wwObject v-bind:ww-object="section.data.helloWorld"></wwObject>
+
+            <!-- This is another WeWeb object that we initiaze as an image -->
             <wwObject class="hello-image" v-bind:ww-object="section.data.image1"></wwObject>
 
-            <!-- LIST -->
-            <wwLayoutColumn tag="div" ww-default="ww-text" :ww-list="section.data.list" class="list" @ww-add="add(section.data.list, $event)" @ww-remove="remove(section.data.list, $event)">
-                <wwObject tag="div" v-for="object in section.data.list" :key="object.uniqueId" :ww-object="object"></wwObject>
-            </wwLayoutColumn>
+            <!-- This is a content block, a list of objects, it will add the little blue "plus" around the objects in the editor -->
+            <div class="content-block">
+                <wwLayoutColumn tag="div" ww-default="ww-text" :ww-list="section.data.contentList" class="list" @ww-add="add(section.data.contentList, $event)" @ww-remove="remove(section.data.contentList, $event)">
+                    <wwObject tag="div" v-for="object in section.data.contentList" :key="object.uniqueId" :ww-object="object"></wwObject>
+                </wwLayoutColumn>
+            </div>
         </div>
     </div>
 </template>
@@ -30,7 +36,7 @@
 export default {
     name: "__COMPONENT_NAME__",
     props: {
-        // The section controller object is passed to you.
+        // The section controller object is passed. You can access it anytime
         sectionCtrl: Object
     },
     data() {
@@ -38,60 +44,67 @@ export default {
         }
     },
     computed: {
-        //Get the section object here !
-        // It contains all the info and data about the section
-        // Use it has you like !
+        // The section object contains all the info and data about the section
+        // Use it as you like !
         section() {
             return this.sectionCtrl.get();
         }
     },
     created() {
-
-        //Initialize section data
-        let needUpdate = false
-
-        this.section.data = this.section.data || {};
-
-        //Initialize content
-        if (!this.section.data.helloWorld) {
-            this.section.data.helloWorld = wwLib.wwObject.getDefault({
-                type: 'ww-text',
-                data: {
-                    text: {
-                        fr_FR: 'Hello World FR !',
-                        en_GB: 'Hello World !'
-                    }
-                }
-            });
-            needUpdate = true
-        }
-
-        if (!this.section.data.color) {
-            this.section.data.color = wwLib.wwObject.getDefault({
-                type: 'ww-color'
-            });
-            needUpdate = true
-        }
-
-        if (!this.section.data.image1) {
-            this.section.data.image1 = wwLib.wwObject.getDefault({
-                type: 'ww-image'
-            });
-            needUpdate = true
-        }
-
-        if (!this.section.data.list) {
-            this.section.data.list = [];
-            needUpdate = true;
-        }
-
-
-        if (needUpdate) {
-            this.sectionCtrl.update(this.section);
-        }
-
+        // Initialize the data once the section is created in the DOM
+        this.init()
     },
     methods: {
+        init() {
+            // Initialize section data
+            let needUpdate = false
+
+            // We will only save the data in this.section.data
+            // So you need to put in there all the data of you WeWeb objects
+            this.section.data = this.section.data || {};
+
+            // Initialize WeWeb objects that are in the html template up there
+            if (!this.section.data.helloWorld) {
+                this.section.data.helloWorld = wwLib.wwObject.getDefault({
+                    type: 'ww-text',
+                    data: {
+                        text: {
+                            fr: 'Hello World FR !',
+                            en: 'Hello World !'
+                        }
+                    }
+                });
+                needUpdate = true
+            }
+
+            if (!this.section.data.background) {
+                this.section.data.background = wwLib.wwObject.getDefault({
+                    type: 'ww-color'
+                });
+                needUpdate = true
+            }
+
+            if (!this.section.data.image1) {
+                this.section.data.image1 = wwLib.wwObject.getDefault({
+                    type: 'ww-image'
+                });
+                needUpdate = true
+            }
+
+            if (!this.section.data.contentList) {
+                this.section.data.contentList = [];
+                needUpdate = true;
+            }
+
+
+            if (needUpdate) {
+                this.sectionCtrl.update(this.section);
+            }
+        },
+
+        // --------- EDITOR FUNCTIONS ---------
+        // All the codes between /* wwManager:start */ and /* wwManager:end */ are only for editor purposes
+        // So It won't in the published website!
         /* wwManager:start */
         add(list, options) {
             try {
@@ -108,9 +121,8 @@ export default {
             } catch (error) {
                 wwLib.wwLog.error('ERROR : ', error);
             }
-        },
+        }
         /* wwManager:end */
-
     }
 };
 </script>
@@ -136,10 +148,12 @@ export default {
     .hello-image {
         width: 200px;
     }
-    .list {
-        margin-top: 20px;
+    .content-block {
+        margin-top: 50px;
         width: 50%;
         margin-left: 25%;
+        padding: 50px;
+        background-color: #fafafafa;
     }
 }
 </style>
