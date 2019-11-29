@@ -13,7 +13,6 @@
         <wwObject class="background" v-bind:ww-object="section.data.background" ww-category="background"></wwObject>
 
         <div class="content">
-            <div>tralalalala</div>
             <!-- This is a simple WeWeb object which can be anything in the editor -->
             <wwObject v-bind:ww-object="section.data.helloWorld"></wwObject>
 
