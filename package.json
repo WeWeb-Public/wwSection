@@ -1,5 +1,5 @@
 {
-    "name": "hello-world",
+    "name": "hello-world-patate",
     "type": "section",
     "wewebPublic": "true",
     "repository": {
@@ -14,6 +14,7 @@
         "upload": "weweb-upload"
     },
     "dependencies": {
+        "hello-world": "git+https://github.com/WeWeb-Public/wwSection.git",
         "vue": "^2.6.10"
     },
     "devDependencies": {

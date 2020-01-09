@@ -13,6 +13,8 @@
         <wwObject class="background" v-bind:ww-object="section.data.background" ww-category="background"></wwObject>
 
         <div class="content">
+            <div>tralalala</div>
+            <wwObject v-bind:ww-object="section.data.code"></wwObject>
             <!-- This is a simple WeWeb object which can be anything in the editor -->
             <wwObject v-bind:ww-object="section.data.helloWorld"></wwObject>
 
@@ -72,6 +74,14 @@ export default {
                             en: 'Hello World !'
                         }
                     }
+                });
+                needUpdate = true
+            }
+
+            if (!this.section.data.code) {
+                this.section.data.code = wwLib.wwObject.getDefault({
+                    type: 'ww-tip',
+                    data: {}
                 });
                 needUpdate = true
             }
