@@ -1,5 +1,5 @@
 {
-    "name": "hello-world-patate",
+    "name": "hello-world",
     "type": "section",
     "wewebPublic": "true",
     "repository": {
@@ -11,14 +11,13 @@
     "scripts": {
         "build": "weweb-build",
         "serve": "weweb-serve",
-        "upload": "weweb-upload"
+        "create-config": "weweb-config"
     },
     "dependencies": {
-        "hello-world": "git+https://github.com/WeWeb-Public/wwSection.git",
-        "vue": "^2.6.10"
+        "vue": "^2.6.11"
     },
     "devDependencies": {
-        "weweb-client": "^1.0.47"
+        "weweb-client": "^1.1.1"
     },
     "browserslist": [
         "> 1%",
